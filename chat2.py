@@ -321,7 +321,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://ravianai.azurewebsites.net"],
+    allow_origins=["https://ravianai.onrender.com"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -539,7 +539,7 @@ async def callback2():
 
 @app.get("/")
 async def get():
-    html_path = Path(__file__).resolve().parent / "templates" / "chat3.html"
+    html_path = Path(__file__).resolve().parent  / "chat3.html"
     return HTMLResponse(content=html_path.read_text())
     
 
