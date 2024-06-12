@@ -264,7 +264,7 @@
             });
         }
 
-        let ws = new WebSocket("wss://ravianai.azurewebsites.net/ws/");
+        let ws = new WebSocket("wss://https://ravianai.onrender.com/ws/");
         ws.onmessage = function(event) {
             let message = JSON.parse(event.data);
             let chatbox = document.getElementById('msg-container');
