@@ -265,6 +265,9 @@
         }
 
         let ws = new WebSocket("wss://ravian-fastapi.onrender.com/ws/");
+        ws.onopen = function(event) {
+            console.log("WebSocket connection opened:", event);
+        };
         ws.onmessage = function(event) {
             let message = JSON.parse(event.data);
             let chatbox = document.getElementById('msg-container');
@@ -308,6 +311,19 @@
                 body: JSON.stringify(message)
             });
         };
+
+        ws.onerror = function(event) {
+            console.log("WebSocket error:", event);
+        };
+
+        ws.onclose = function(event) {
+            console.log("WebSocket connection closed:", event);
+            setTimeout(function() {
+                console.log("Attempting to reconnect...");
+                ws = new WebSocket("wss://ravian-fastapi.onrender.com/ws/");
+            }, 1000);
+        };
+
 
         document.getElementById("message-form").addEventListener("submit", (event) => {
             event.preventDefault(); // Prevent form submission
